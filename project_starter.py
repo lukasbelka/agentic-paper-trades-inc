@@ -613,7 +613,7 @@ def search_quote_history(search_terms: List[str], limit: int = 5) -> List[Dict]:
 def run_test_scenarios():
     
     print("Initializing Database...")
-    init_database()
+    init_database(db_engine)
     try:
         quote_requests_sample = pd.read_csv("quote_requests_sample.csv")
         quote_requests_sample["request_date"] = pd.to_datetime(
@@ -660,6 +660,7 @@ def run_test_scenarios():
         ############
 
         # response = call_your_multi_agent_system(request_with_date)
+        response = "Not yet implemented" # Added a temporary response so the script doesn't crash
 
         # Update state
         report = generate_financial_report(request_date)
