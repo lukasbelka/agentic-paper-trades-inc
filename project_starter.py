@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-import os
+# import os
 import time
-import dotenv
+# import dotenv
 import ast
 from sqlalchemy.sql import text
 from datetime import datetime, timedelta
@@ -638,7 +638,6 @@ def run_test_scenarios():
     ############
     ############
     ############
-
     results = []
     for idx, row in quote_requests_sample.iterrows():
         request_date = row["request_date"].strftime("%Y-%m-%d")
