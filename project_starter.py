@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-# import os
+import os
 import time
-# import dotenv
+import dotenv
 import ast
 from sqlalchemy.sql import text
 from datetime import datetime, timedelta
@@ -590,6 +590,20 @@ def search_quote_history(search_terms: List[str], limit: int = 5) -> List[Dict]:
 
 
 # Set up and load your env parameters and instantiate your model.
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get API key from environment
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY not found in environment variables")
+
+# Instantiate the OpenAI client
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
+
+print("OpenAI client instantiated successfully")
 
 
 """Set up tools for your agents to use, these should be methods that combine the database functions above
