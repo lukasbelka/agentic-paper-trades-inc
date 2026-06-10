@@ -10,4 +10,9 @@ model = LiteLLMModel(
     api_key=GEMINI_API_KEY
 )
 
-print("Google Flash model instantiated successfully via smolagents")
+model_orchestrator = LiteLLMModel(
+    model_id="gemini/gemini-2.5-pro",
+    api_key=GEMINI_API_KEY
+)
+
+print("Models instantiated successfully via smolagents")
