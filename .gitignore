@@ -4,6 +4,7 @@
 __pycache__/
 
 
-# exclude data
-munder_difflin.db
-/data
+
+project.md
+
+.gitignore
