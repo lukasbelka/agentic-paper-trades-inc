@@ -3,4 +3,9 @@
 /venv
 __pycache__/
 
-munder_difflin.db
+
+follow-up.md
+project.md
+project_report.md
+
+.gitignore
