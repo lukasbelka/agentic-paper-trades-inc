@@ -2,7 +2,7 @@ import pandas as pd
 import time
 import os
 
-from config.settings import DATA_DIR, db_engine
+from config.settings import BASE_DIR, DATA_DIR, db_engine
 from src.database.core import init_database
 from src.tools.finance_tools import generate_financial_report
 
@@ -88,7 +88,7 @@ def run_test_scenarios():
     print(f"Final Inventory: ${final_report['inventory_value']:.2f}")
 
     # Save results
-    results_path = os.path.join(DATA_DIR, "test_results.csv")
+    results_path = os.path.join(BASE_DIR, "test_results.csv")
     pd.DataFrame(results).to_csv(results_path, index=False)
     return results
 

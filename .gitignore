@@ -3,4 +3,7 @@
 /venv
 __pycache__/
 
+
+# exclude data
 munder_difflin.db
+/data
