@@ -3,9 +3,7 @@
 /venv
 __pycache__/
 
-
-follow-up.md
-project.md
-project_report.md
+munder_difflin.db
+/proj
 
 .gitignore
