@@ -38,7 +38,7 @@ def get_stock_level_tool(item_name: str, as_of_date: str) -> int:
 def get_catalog_items_tool() -> list:
     """
     Retrieve the names of all paper products and items carried in Munder Difflin's catalog.
-    Use this to see what items we sell, even if they currently have zero stock.
+    Retrieves a list of items sold in the catalog, regardless of current stock levels.
 
     Returns:
         A list of catalog item names.
@@ -91,9 +91,9 @@ inventory_agent = CodeAgent(
     name="inventory_agent",
     description=(
         "Manages and checks the inventory of paper products. "
-        "CRITICAL INSTRUCTION: Customers often use inexact names. You MUST use get_catalog_items_tool() FIRST to retrieve the exact catalog item names. "
-        "Then, use Python code to map the customer's requested item to the closest match in the catalog (e.g. 'A4 glossy paper' -> 'Glossy paper', 'heavy cardstock (white)' -> 'Cardstock', 'colored paper (assorted colors)' -> 'Colored paper'). "
-        "Only use the exact mapped catalog name with get_stock_level_tool and get_inventory_details_tool."
+        "Capable of retrieving exact catalog item names and mapping inexact "
+        "customer requests to the closest catalog match before checking stock "
+        "levels and details."
     )
 )
 
@@ -138,8 +138,8 @@ quoting_agent = CodeAgent(
     description=(
         "Responsible for generating price quotes for customer requests. "
         "It looks up standard unit prices, searches historical quotes for similar requests, "
-        "applies bulk discounts, and calculates a rounded final total. "
-        "Always provides a clear explanation of how the price was calculated."
+        "applies bulk discounts, and calculates a rounded final total, "
+        "providing a clear explanation of the calculation."
     )
 )
 
@@ -228,6 +228,6 @@ sales_closure_agent = CodeAgent(
         "Responsible for final order processing and bookkeeping. "
         "It registers transactions in the database (sales to customers or stock_orders to suppliers). "
         "It can check cash balances, generate financial reports, and check delivery dates for supplier orders. "
-        "Use this agent to finalize orders, record transactions, and run financial audits."
+        "Used to finalize orders, record transactions, and run financial audits."
     )
 )
