@@ -6,12 +6,12 @@ if not GEMINI_API_KEY:
 
 # Instantiate the Google Flash model using smolagents' LiteLLMModel wrapper
 model = LiteLLMModel(
-    model_id="gemini/gemini-2.5-flash",
+    model_id="gemini/gemini-flash-latest",
     api_key=GEMINI_API_KEY
 )
 
 model_orchestrator = LiteLLMModel(
-    model_id="gemini/gemini-2.5-pro",
+    model_id="gemini/gemini-flash-latest",
     api_key=GEMINI_API_KEY
 )
 

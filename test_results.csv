@@ -1,21 +1,21 @@
 request_id,request_date,cash_balance,inventory_value,response
-1,2025-04-01,45059.7,4940.299999999999,Not yet implemented
-2,2025-04-03,45059.7,4940.299999999999,Not yet implemented
-3,2025-04-04,45059.7,4940.299999999999,Not yet implemented
-4,2025-04-05,45059.7,4940.299999999999,Not yet implemented
-5,2025-04-05,45059.7,4940.299999999999,Not yet implemented
-6,2025-04-06,45059.7,4940.299999999999,Not yet implemented
-7,2025-04-07,45059.7,4940.299999999999,Not yet implemented
-8,2025-04-07,45059.7,4940.299999999999,Not yet implemented
-9,2025-04-07,45059.7,4940.299999999999,Not yet implemented
-13,2025-04-08,45059.7,4940.299999999999,Not yet implemented
-12,2025-04-08,45059.7,4940.299999999999,Not yet implemented
-10,2025-04-08,45059.7,4940.299999999999,Not yet implemented
-11,2025-04-08,45059.7,4940.299999999999,Not yet implemented
-14,2025-04-09,45059.7,4940.299999999999,Not yet implemented
-15,2025-04-12,45059.7,4940.299999999999,Not yet implemented
-16,2025-04-13,45059.7,4940.299999999999,Not yet implemented
-17,2025-04-14,45059.7,4940.299999999999,Not yet implemented
-18,2025-04-14,45059.7,4940.299999999999,Not yet implemented
-19,2025-04-15,45059.7,4940.299999999999,Not yet implemented
-20,2025-04-17,45059.7,4940.299999999999,Not yet implemented
+1,2025-04-01,46059.7,4935.299999999999,"Dear customer, your order is confirmed and will be delivered on time. Thank you!"
+2,2025-04-03,47059.7,4930.299999999999,"Dear customer, your order is confirmed and will be delivered on time. Thank you!"
+3,2025-04-04,48059.7,4925.299999999999,"Dear customer, your order is confirmed and will be delivered on time. Thank you!"
+4,2025-04-05,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+5,2025-04-05,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+6,2025-04-06,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+7,2025-04-07,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+8,2025-04-07,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+9,2025-04-07,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+13,2025-04-08,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+12,2025-04-08,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+10,2025-04-08,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+11,2025-04-08,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+14,2025-04-09,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+15,2025-04-12,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+16,2025-04-13,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+17,2025-04-14,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+18,2025-04-14,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+19,2025-04-15,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
+20,2025-04-17,48059.7,4925.299999999999,"Dear customer, we are unable to fulfill this order due to insufficient stock."
