@@ -5,7 +5,7 @@ import os
 from config.settings import BASE_DIR, DATA_DIR, db_engine
 from src.database.core import init_database
 from src.tools.finance_tools import generate_financial_report
-from src.agents.orchestrator import call_your_multi_agent_system
+from src.agents.orchestrator import call_multi_agent_system
 
 def run_test_scenarios():
     
@@ -53,7 +53,7 @@ def run_test_scenarios():
         ############
         ############
 
-        response = call_your_multi_agent_system(request_with_date)
+        response = call_multi_agent_system(request_with_date)
 
         # Update state
         report = generate_financial_report(request_date)

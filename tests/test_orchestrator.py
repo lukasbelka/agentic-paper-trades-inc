@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config.settings import db_engine
 from src.database.core import init_database
-from src.agents.orchestrator import call_your_multi_agent_system
+from src.agents.orchestrator import call_multi_agent_system
 
 def run_orchestrator_test():
     print("=== 1. Initializing predictable database state (seed 137) ===")
@@ -25,7 +25,7 @@ def run_orchestrator_test():
     print("\n=== 2. Running Orchestrator Agent Test ===")
     print(f"Request: {request_with_date}")
     
-    response = call_your_multi_agent_system(request_with_date)
+    response = call_multi_agent_system(request_with_date)
     
     print("\n=== 3. Evaluation Result ===")
     print(f"Orchestrator final response:\n{response}")

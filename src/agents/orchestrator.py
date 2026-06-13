@@ -13,7 +13,7 @@ orchestrator_agent = CodeAgent(
 
 req_idx = 0
 
-def call_your_multi_agent_system(request_with_date: str) -> str:
+def call_multi_agent_system(request_with_date: str) -> str:
     global req_idx
     req_idx += 1
     
