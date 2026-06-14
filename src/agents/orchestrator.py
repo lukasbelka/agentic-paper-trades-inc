@@ -7,7 +7,7 @@ orchestrator_agent = CodeAgent(
     tools=[],
     model=model_orchestrator,
     managed_agents=[inventory_agent, quoting_agent, sales_closure_agent],
-    max_steps=4,
+    max_steps=8,
     name="orchestrator_agent",
     description="""You are the orchestrator agent handling customer quote requests for a paper trading company.
     You must strictly follow this workflow:
@@ -23,7 +23,10 @@ orchestrator_agent = CodeAgent(
 
 Final Step: Once the sales closure agent has finished, provide a final response to the client.
 This final response MUST include the catalog items, quantities, final quoted price, transaction outcome,
-and delivery information."""
+and delivery information.
+
+You MUST end every conversation by calling final_answer(...) with a customer-facing string. Never include raw code,
+internal tool names, or reasoning traces in the final answer."""
 )
 
 def call_multi_agent_system(request_with_date: str) -> str:
