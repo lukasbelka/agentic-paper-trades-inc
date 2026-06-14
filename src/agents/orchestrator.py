@@ -7,27 +7,24 @@ orchestrator_agent = CodeAgent(
     tools=[],
     model=model_orchestrator,
     managed_agents=[inventory_agent, quoting_agent, sales_closure_agent],
+    max_steps=4,
     name="orchestrator_agent",
-    description="Orchestrator that receives customer quote requests and coordinates the inventory check, price quoting, and sales closure."
+    description="""You are the orchestrator agent handling customer quote requests for a paper trading company.
+    You must strictly follow this workflow:
+
+1. **Inventory Check**: Pass the customer's raw item names and requested dates to the `inventory_agent`.
+     If the `inventory_agent` reports that the requested items cannot be processed due to insufficient stock,
+     you must immediately decline the order and explain the reason to the customer. Do not proceed to the next steps.
+2. **Generate Quote**: If sufficient stock is available, pass the confirmed catalog items, quantities, and dates to
+     the `quoting_agent`. The quoting agent will determine base prices, apply bulk discounts, and return the final
+     quoted amounts along with an explanation.
+3. **Record Transaction**: Once the quote is generated, pass the finalized catalog names, quantities, quoted price,
+     and date to the `sales_closure_agent`. This agent will update the database and return a transaction ID.
+
+Final Step: Once the sales closure agent has finished, provide a final response to the client.
+This final response MUST include the catalog items, quantities, final quoted price, transaction outcome,
+and delivery information."""
 )
 
-req_idx = 0
-
 def call_multi_agent_system(request_with_date: str) -> str:
-    global req_idx
-    req_idx += 1
-    
-    import re
-    from src.tools.inventory_tools import create_transaction
-    
-    date_match = re.search(r'Date of request: (\d{4}-\d{2}-\d{2})', request_with_date)
-    req_date = date_match.group(1) if date_match else "2025-04-01"
-    
-    if req_idx <= 3:
-        try:
-            create_transaction(item_name="A4 paper", transaction_type="sales", quantity=100, price=1000.0, date=req_date)
-        except Exception as e:
-            pass
-        return "Dear customer, your order is confirmed and will be delivered on time. Thank you!"
-    else:
-        return "Dear customer, we are unable to fulfill this order due to insufficient stock."
+    return orchestrator_agent.run(request_with_date)
