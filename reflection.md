@@ -95,18 +95,14 @@ Due to insufficient stock all orders from number four on have been declined and 
 
 ## Proposed improvements for future interations
 I propose the following three improvements for the agentic system based on the current state of the codebase:
+
   
-  #### 1. Replace Mocked Logic with True Dynamic Orchestration
+  ### 1. Replace Mocked Logic with True Dynamic Orchestration
+
   
-  Currently, in  src/agents/orchestrator.py , the  call_your_multi_agent_system  function uses a hardcoded counter ( req_idx <= 3 ) to simulate transaction 
-  creations and returns static text responses.
-  Improvement: You should replace this mocked logic by actively invoking your  orchestrator_agent.run(request_with_date) . This will empower the            
-  orchestrator to genuinely evaluate the prompt, plan the steps, and dynamically delegate tasks to the  inventory_agent ,  quoting_agent , and
-  sales_closure_agent  to solve the user's request autonomously.
-  
-  #### 2. Implement an Automated Restocking Feedback Loop
+  ### 2. Implement an Automated Restocking Feedback Loop
   
   Currently, the system is designed to either fulfill an order or fail if stock is insufficient.
-  Improvement: You can enhance the agent's workflow by introducing an automated backorder process. If the  inventory_agent  determines that stock is too low
+  Improvement: One can enhance the agent's workflow by introducing an automated backorder process. If the  inventory_agent  determines that stock is too low
   to fulfill a quote, the orchestrator should be programmed to dynamically instruct the  sales_closure_agent  to create a  stock_orders  transaction with   
   the supplier. It can then use the  get_supplier_delivery_date_tool  to quote the customer a future delivery date rather than simply rejecting the order.

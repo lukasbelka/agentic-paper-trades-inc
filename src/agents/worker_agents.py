@@ -88,6 +88,7 @@ def get_inventory_details_tool(item_name: str, as_of_date: str) -> dict:
 inventory_agent = CodeAgent(
     tools=[get_all_inventory_tool, get_stock_level_tool, get_catalog_items_tool, get_inventory_details_tool],
     model=model,
+    max_steps=3,
     name="inventory_agent",
     description=(
         "Manages and checks the inventory of paper products. "
@@ -134,6 +135,7 @@ def get_item_price_tool(item_name: str) -> float:
 quoting_agent = CodeAgent(
     tools=[search_quote_history_tool, get_item_price_tool],
     model=model,
+    max_steps=3,
     name="quoting_agent",
     description=(
         "Responsible for generating price quotes for customer requests. "
@@ -223,6 +225,7 @@ sales_closure_agent = CodeAgent(
         generate_financial_report_tool
     ],
     model=model,
+    max_steps=3,
     name="sales_closure_agent",
     description=(
         "Responsible for final order processing and bookkeeping. "

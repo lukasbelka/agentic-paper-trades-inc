@@ -74,7 +74,7 @@ def run_test_scenarios():
             }
         )
 
-        time.sleep(1)
+        time.sleep(8)
 
     # Final report
     final_date = quote_requests_sample["request_date"].max().strftime("%Y-%m-%d")
