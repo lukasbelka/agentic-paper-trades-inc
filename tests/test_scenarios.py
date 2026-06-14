@@ -55,6 +55,19 @@ def run_test_scenarios():
 
         response = call_multi_agent_system(request_with_date)
 
+        # Output-Sanitization Pass
+        import re
+        response_str = str(response)
+        # Strip out any blocks enclosed in <code>...</code>
+        response_str = re.sub(r'<code>.*?</code>', '', response_str, flags=re.DOTALL)
+        # Remove any lines starting with `thought`
+        response_lines = [line for line in response_str.split('\n') if not line.strip().startswith('thought')]
+        response_str = '\n'.join(response_lines).strip()
+        
+        if not response_str:
+            response_str = "I'm sorry, I couldn't process this request."
+        response = response_str
+
         # Update state
         report = generate_financial_report(request_date)
         current_cash = report["cash_balance"]
