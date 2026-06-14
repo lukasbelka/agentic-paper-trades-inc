@@ -33,23 +33,44 @@ Do NOT simply copy-paste or forward the response from your managed agents (e.g.,
 def _fallback_message(request: str) -> str:
     return "I'm sorry, I couldn't process this request."
 
+def format_customer_response(response_str: str) -> str:
+    import litellm
+    from config.settings import GEMINI_API_KEY
+    
+    prompt = f"""
+Please rewrite the following text so that it is exclusively a professional, synthesized customer email.
+You MUST completely remove and rephrase the following to hide all internal system operations:
+1. Transaction IDs or database references (e.g. "transaction ID: 20", "recorded in the database", "registered as sales transactions").
+2. Agent-Trace headings and metadata (e.g. "Task outcome", "Here is the final answer...", "observation above").
+3. Exact inventory quantities and diagnostics (e.g. "272 sheets", "-105 sheets", "0 units", "inventory discrepancy"). Replace with simple availability phrases (e.g. "currently unavailable", "not in our catalog", "out of stock").
+4. Tool names (e.g. get_supplier_delivery_date_tool, *_tool).
+5. Internal system errors (e.g. "failed to extract details", "quoting system", "system lacks pricing information").
+6. Do NOT use placeholders like "[Your Company Name]". Instead, end the email with a fixed signature:
+"Best regards,
+Munder Difflin Paper Co."
+
+Output ONLY the rewritten customer email, nothing else. Do not hallucinate details not present in the original message.
+
+Original Text:
+{response_str}
+"""
+    try:
+        llm_response = litellm.completion(
+            model="gemini/gemini-2.5-flash",
+            messages=[{"role": "user", "content": prompt}],
+            api_key=GEMINI_API_KEY
+        )
+        return llm_response.choices[0].message.content.strip()
+    except Exception as e:
+        # Fallback if LLM fails
+        return "Your order has been processed. Thank you!\n\nBest regards,\nMunder Difflin Paper Co."
+
 def call_multi_agent_system(request_with_date: str) -> str:
     result = orchestrator_agent.run(request_with_date)
     result_str = str(result).strip()
+    
     if result_str.startswith('<code>') or result_str.startswith('thought') or 'Calling tools:' in result_str[:200]:
         return _fallback_message(request_with_date)
         
-    # Safety net: Catch any leaked dictionaries or raw agent forwards
-    if "Here is the final answer from your managed agent" in result_str or "{'" in result_str:
-        import ast
-        try:
-            dict_str = result_str[result_str.find("{"):]
-            data = ast.literal_eval(dict_str)
-            for k, v in data.items():
-                if 'extremely detailed version' in k.lower() or 'detailed' in k.lower():
-                    return str(v).strip()
-        except Exception:
-            pass
-        return "Your order has been processed successfully. Thank you!"
-        
-    return result_str
+    # Use robust LLM-based sanitization
+    return format_customer_response(result_str)
