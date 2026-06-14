@@ -97,9 +97,12 @@ Due to insufficient stock all orders from number four on have been declined and 
 I propose the following three improvements for the agentic system based on the current state of the codebase:
 
   
-  ### 1. Replace Mocked Logic with True Dynamic Orchestration
-
+  ### 1. Implement a Human-in-the-Loop (HITL) Verification Step for High-Value Orders
   
+  Currently, all orders are processed fully autonomously from quote to sales closure. 
+  Improvement: Introduce a Human-in-the-Loop (HITL) mechanism for orders that exceed a certain monetary threshold or quantity limit. In case the quoting_agent generates a quote above this threshold, the orchestrator should pause execution and notify a human manager for approval before passing the data to the sales_closure_agent. This ensures that massive or unusual orders are manually verified, which mitigates the risk of hallucinations or incorrect bulk discounts on large-scale transactions.
+
+
   ### 2. Implement an Automated Restocking Feedback Loop
   
   Currently, the system is designed to either fulfill an order or fail if stock is insufficient.

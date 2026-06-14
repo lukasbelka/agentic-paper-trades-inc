@@ -1,3 +1,6 @@
+import pandas as pd
+from config.settings import db_engine
+
 from smolagents import tool, CodeAgent
 from src.agents.core import model
 from src.tools.inventory_tools import get_all_inventory, get_stock_level, get_supplier_delivery_date, create_transaction
@@ -43,8 +46,6 @@ def get_catalog_items_tool() -> list:
     Returns:
         A list of catalog item names.
     """
-    import pandas as pd
-    from config.settings import db_engine
     df = pd.read_sql("SELECT item_name FROM inventory", db_engine)
     return df["item_name"].tolist()
 
@@ -62,10 +63,6 @@ def get_inventory_details_tool(item_name: str, as_of_date: str) -> dict:
         A dictionary with 'item_name', 'category', 'unit_price', 'min_stock_level', and 'current_stock'.
         Returns an empty dictionary if the item is not in our catalog.
     """
-    import pandas as pd
-    from config.settings import db_engine
-    from src.tools.inventory_tools import get_stock_level
-    
     # Query catalog details
     df_cat = pd.read_sql("SELECT * FROM inventory WHERE item_name = :item_name", db_engine, params={"item_name": item_name})
     if df_cat.empty:
@@ -94,7 +91,8 @@ inventory_agent = CodeAgent(
         "Manages and checks the inventory of paper products. "
         "Capable of retrieving exact catalog item names and mapping inexact "
         "customer requests to the closest catalog match before checking stock "
-        "levels and details."
+        "levels and details. "
+        "You MUST end your work by calling final_answer(...) with a clean string containing your result. Never return raw Python source code or internal reasoning traces."
     )
 )
 
@@ -124,8 +122,6 @@ def get_item_price_tool(item_name: str) -> float:
     Returns:
         The standard unit price as a float. Returns 0.0 if the item is not found.
     """
-    import pandas as pd
-    from config.settings import db_engine
     df = pd.read_sql("SELECT unit_price FROM inventory WHERE item_name = :item_name", db_engine, params={"item_name": item_name})
     if df.empty:
         return 0.0
@@ -141,7 +137,8 @@ quoting_agent = CodeAgent(
         "Responsible for generating price quotes for customer requests. "
         "It looks up standard unit prices, searches historical quotes for similar requests, "
         "applies bulk discounts, and calculates a rounded final total, "
-        "providing a clear explanation of the calculation."
+        "providing a clear explanation of the calculation. "
+        "You MUST end your work by calling final_answer(...) with a clean string containing your result. Never return raw Python source code or internal reasoning traces."
     )
 )
 
@@ -231,6 +228,7 @@ sales_closure_agent = CodeAgent(
         "Responsible for final order processing and bookkeeping. "
         "It registers transactions in the database (sales to customers or stock_orders to suppliers). "
         "It can check cash balances, generate financial reports, and check delivery dates for supplier orders. "
-        "Used to finalize orders, record transactions, and run financial audits."
+        "Used to finalize orders, record transactions, and run financial audits. "
+        "You MUST end your work by calling final_answer(...) with a clean string containing your result. Never return raw Python source code or internal reasoning traces."
     )
 )
